@@ -7,7 +7,7 @@ class RegistrationsController < ApplicationController
         @user = User.new(registration_params)
         if @user.save
             login @user
-            redirect_to root_path
+            redirect_to products_path
         else
             render :new, status: :unprocessable_entity
         end

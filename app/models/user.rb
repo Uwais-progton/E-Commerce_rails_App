@@ -1,8 +1,16 @@
 class User < ApplicationRecord
     has_secure_password
 
+    has_one :cart, dependent: :destroy
+
     validates :email, presence: true
     normalizes :email, with: ->(email) {email.strip.downcase}
+
+    ROLES = %w{admin}
+
+    def admin?
+        role == "admin"
+    end
 
     generates_token_for :password_reset, expires_in: 15.minutes do
         password_salt&.last(10)

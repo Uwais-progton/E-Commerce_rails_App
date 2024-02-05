@@ -15,12 +15,18 @@
     <div><%= alert %></div>
 
     <% if user_signed_in? %>
+      <%= link_to 'Home', root_path %>
       <%= link_to "Edit Password", edit_password_path%>
+     
+
+      
       <%= button_to "Log out", session_path, method: :delete %>
     <% else %>
+      <%= link_to 'Home', root_path %>
       <%= link_to "Sign Up", new_registration_path%>
       <%= link_to "Log In", new_session_path%>
     <% end %>
+    
     
     <%= yield %>
   </body>

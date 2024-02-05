@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     def create
       if user = User.authenticate_by(email: params[:email], password: params[:password])
         login User
-        redirect_to root_path, notice: "You have signed successfully."
+        redirect_to product_url, notice: "You have signed successfully."
       else
         flash[:alert] = "Invalid email or password."
         render :new, status: :unprocessable_entity

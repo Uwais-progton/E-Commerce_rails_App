@@ -1,0 +1,14 @@
+<% @products.each do |product| %>
+  <div>
+    <h3><%= product.name %></h3>
+    <p><%= product.description %></p>
+    <p><strong>Price: <%= number_to_currency(product.price) %></strong></p>
+    
+    <% if current_user&.admin? %>
+      <%= link_to 'Edit', edit_product_path(product) %>
+      <%= link_to 'Delete', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% else %>
+      <%= button_to 'Add to Cart', add_to_cart_path(product), method: :post %>
+    <% end %>
+  </div>
+<% end %>
