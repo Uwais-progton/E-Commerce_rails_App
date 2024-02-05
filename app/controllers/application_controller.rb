@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
     helper_method :current_user
 
     def authenticate_user_from_session
-      User.find_by(id: session[:user_id])
+      user_id = session[:user_id]
+      User.find_by(id: user_id) if user_id.present? && User.exists?(user_id)
     end
 
     def user_signed_in?
@@ -23,7 +24,11 @@ class ApplicationController < ActionController::Base
     def login(user)
         Current.user = user
         reset_session
-        session[:user_id] = user.id
+        if user.present?
+          session[:user_id] = user.id
+        else
+          Rails.logger.error("User is nil in login method")
+        end
     end
 
     def logout(user)

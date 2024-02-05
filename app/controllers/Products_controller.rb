@@ -3,8 +3,13 @@ class ProductsController < ApplicationController
   
     def index
       @products = Product.all
+      @cart = current_user.cart
     end
-  
+    
+    def show
+      @product = Product.find(params[:id])
+    end
+
     def new
       @product = Product.new
     end

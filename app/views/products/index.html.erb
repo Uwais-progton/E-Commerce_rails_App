@@ -1,3 +1,4 @@
+<h1>All Products</h1>
 <% @products.each do |product| %>
   <div>
     <h3><%= product.name %></h3>
@@ -8,7 +9,10 @@
       <%= link_to 'Edit', edit_product_path(product) %>
       <%= link_to 'Delete', product, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% else %>
-      <%= button_to 'Add to Cart', add_to_cart_path(product), method: :post %>
+      <%= button_to 'Add to Cart', cart_add_to_cart_path(@cart, product_id: product.id), method: :post %>
     <% end %>
   </div>
 <% end %>
+  <%= link_to 'Show Shopping Cart', cart_path, class: 'btn btn-primary' %>
+
+

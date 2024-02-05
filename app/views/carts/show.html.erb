@@ -1,6 +1,6 @@
 <h2>Your Shopping Cart</h2>
 
-<% if @cart.cart_items.any? %>
+<% if @cart && @cart.cart_items.any? %>
   <ul>
     <% @cart.cart_items.each do |cart_item| %>
       <li>
@@ -13,3 +13,4 @@
 <% else %>
   <p>Your cart is empty.</p>
 <% end %>
+<%= link_to "Back to products", products_url%>
