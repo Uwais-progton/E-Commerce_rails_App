@@ -1,4 +1,7 @@
-<h1>Update Password</h1>
+<br>
+<br>
+<div class="form-container">
+    <h1>Update Password</h1>
 <%= form_with model: current_user, url: password_path do |form|%>
     <%if form.object.errors.any?%>
         <% form.object.errors.full_messages.each do |message|%>
@@ -26,3 +29,13 @@
     </div>
 
 <% end %>
+</div>
+<style>
+     .form-container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>

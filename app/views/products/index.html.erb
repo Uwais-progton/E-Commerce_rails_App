@@ -1,24 +1,92 @@
-<h1>All Products</h1>
-<% @products.each do |product| %>
-  <div>
-    <h3><%= product.name %></h3>
-    <p><%= product.description %></p>
-    <p><strong>Price: <%= number_to_currency(product.price) %></strong></p>
-    
-    <% if current_user&.admin? %>
-      <%= link_to 'Edit', edit_product_path(product) %>
-      <%= link_to 'Delete', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <% else %>
-      <%= button_to 'Add to Cart', cart_add_to_cart_path(@cart, product_id: product.id), method: :post %>
-    <% end %>
-  </div>
-<% end %>
+<h1 style="text-align:center">All Products</h1>
+<div class="product-list">
+  <% @products.each do |product| %>
+    <div class="product">
+      <h3><%= product.name %></h3>
+      <p><%= product.description %></p>
+      <p><strong>Price: <%= number_to_currency(product.price) %></strong></p>
+      
+      <% if current_user&.admin? %>
+        <div class="admin-actions">
+          <%= link_to 'Edit', edit_product_path(product), class: 'btn btn-secondary' %>
+          <%= link_to 'Delete', delete_product_path(product), method: :delete, data: {
+            turbo_method: :delete,
+            turbo_confirm: "Are you sure?"
+          }, class: 'btn btn-danger' %>
+        </div>
+      <% else %>
+        <%= button_to 'Add to Cart', cart_add_to_cart_path(@cart, product_id: product.id), method: :post, class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 <br>
 <br>
 <div>
   <% if current_user&.admin? %>
-    <%= link_to 'Add Product', new_product_path %>
+    <%= link_to 'Add Product', new_product_path, class: 'btn btn-success' %>
   <% else %>
     <%= link_to 'Show Shopping Cart', cart_path, class: 'btn btn-primary' %>
   <% end %>
 </div>
+<style>
+  .product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.product {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.admin-actions {
+  margin-top: 10px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #495057;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-success {
+  background-color: #28a745;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+</style>

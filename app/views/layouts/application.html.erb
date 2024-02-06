@@ -13,20 +13,57 @@
   <body>
     <div><%= notice %></div>
     <div><%= alert %></div>
+   <nav class="navbar">
+      <div class="navbar-container">
+        <% if user_signed_in? %>
+          <%= link_to 'Home', root_path, class: "navbar-link" %>
+          <%= link_to "Edit Password", edit_password_path, class: "navbar-link" %>
+          <%= button_to "Log out", session_path, method: :delete, class: "navbar-button" %>
+        <% else %>
+          <%= link_to 'Home', root_path, class: "navbar-link" %>
+          <%= link_to "Sign Up", new_registration_path, class: "navbar-link" %>
+          <%= link_to "Log In", new_session_path, class: "navbar-link" %>
+        <% end %>
+      </div>
+  </nav>
+  <style>
+    .navbar {
+  background-color: #333;
+  padding: 10px 0;
+}
 
-    <% if user_signed_in? %>
-      <%= link_to 'Home', root_path %>
-      <%= link_to "Edit Password", edit_password_path%>
-     
+.navbar-container {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-      
-      <%= button_to "Log out", session_path, method: :delete %>
-    <% else %>
-      <%= link_to 'Home', root_path %>
-      <%= link_to "Sign Up", new_registration_path%>
-      <%= link_to "Log In", new_session_path%>
-    <% end %>
-    
+.navbar-link {
+  color: #FFD700;
+  text-decoration: none;
+  padding: 5px 10px;
+}
+
+.navbar-link:hover {
+  background-color: #555;
+}
+
+.navbar-button {
+  background-color: #d9534f;
+  color: #FFD700;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.navbar-button:hover {
+  background-color: #c9302c;
+}
+
+  </style>
     
     <%= yield %>
   </body>

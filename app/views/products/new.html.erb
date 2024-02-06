@@ -1,14 +1,74 @@
-<h2>New Product</h2>
+<div class="new-product-form">
+  <h2 style="text-align:center;">New Product</h2>
 
-<%= form_for Product.new do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= form_for Product.new, html: { class: 'product-form' } do |f| %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
 
-  <%= f.label :description %>
-  <%= f.text_area :description %>
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_area :description, class: 'form-control' %>
+    </div>
 
-  <%= f.label :price %>
-  <%= f.text_field :price %>
+    <div class="form-group">
+      <%= f.label :price %>
+      <%= f.text_field :price, class: 'form-control' %>
+    </div>
 
-  <%= f.submit 'Create Product' %>
-<% end %>
+    <div class="form-group">
+      <%= f.submit 'Create Product', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+
+  <%= link_to "Back to products", products_url, class: 'btn btn-secondary' %>
+</div>
+
+<style>
+  .product-form {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #495057;
+}
+
+</style>

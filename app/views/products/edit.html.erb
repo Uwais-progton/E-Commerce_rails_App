@@ -1,14 +1,30 @@
-<h2>Edit Product</h2>
+<br>
+<br>
+<div class="form-container">
+  <h2 style="text-align:center;">Edit Product</h2>
 
-<%= form_for @product do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= form_for @product do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
 
-  <%= f.label :description %>
-  <%= f.text_area :description %>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
 
-  <%= f.label :price %>
-  <%= f.text_field :price %>
+    <%= f.label :price %>
+    <%= f.text_field :price %>
 
-  <%= f.submit 'Update Product' %>
-<% end %>
+    <%= f.submit 'Update Product' %>
+  <% end %>
+
+  <%= link_to "Back to products", products_url%>
+</div>
+<style>
+    .form-container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
+

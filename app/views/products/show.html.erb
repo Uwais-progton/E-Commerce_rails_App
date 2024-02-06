@@ -1,13 +1,82 @@
-<h1>About <%= @product.name%></h1>
-<h2><%= @product.name %></h2>
+<div class="about-product">
+  <h1 style="text-align:center;">About <%= @product.name %></h1>
 
-<p><strong>Description:</strong> <%= @product.description %></p>
-<p><strong>Price:</strong> <%= number_to_currency(@product.price) %></p>
+  <div class="product-details">
+    <h2><%= @product.name %></h2>
+    <p><strong>Description:</strong> <%= @product.description %></p>
+    <p><strong>Price:</strong> <%= number_to_currency(@product.price) %></p>
+  </div>
 
-<% if current_user&.admin? %>
-  <%= link_to 'Edit', edit_product_path(@product) %> |
-  <%= link_to 'Delete', @product, method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
+  <% if current_user&.admin? %>
+    <div class="admin-actions">
+      <%= link_to 'Edit', edit_product_path(@product), class: 'btn btn-primary' %>
+      <%= link_to 'Delete', delete_product_path(@product), method: :delete, data: {
+        turbo_method: :delete,
+        turbo_confirm: "Are you sure?"
+      }, class: 'btn btn-danger' %>
+    </div>
+  <% end %>
 
-<%= button_to 'Add to Cart', cart_add_to_cart_path(@cart, product_id: @product.id), method: :post %>
-<%= link_to "Back to products", products_url%>
+  <%= button_to 'Add to Cart', cart_add_to_cart_path(@cart, product_id: @product.id), method: :post, class: 'btn btn-success' %>
+  <%= link_to "Back to products", products_url, class: 'btn btn-secondary' %>
+</div>
+<style>
+  .about-product {
+  margin: 20px;
+}
+
+.product-details {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.admin-actions {
+  margin-bottom: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-success {
+  background-color: #28a745;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #495057;
+}
+
+</style>

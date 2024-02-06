@@ -1,16 +1,67 @@
-<h2>Your Shopping Cart</h2>
+<div class="shopping-cart">
+  <h2 style="text-align:center;">Your Shopping Cart</h2>
 
-<% if @cart && @cart.cart_items.any? %>
-  <ul>
-    <% @cart.cart_items.each do |cart_item| %>
-      <li>
-        <%= cart_item.product.name %> -
-        Quantity: <%= cart_item.quantity %>
-        <%= link_to 'Remove from Cart', remove_from_cart_path(cart_item), method: :delete %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>Your cart is empty.</p>
-<% end %>
-<%= link_to "Back to products", products_url%>
+  <% if @cart && @cart.cart_items.any? %>
+    <ul class="cart-items">
+      <% @cart.cart_items.each do |cart_item| %>
+        <li class="cart-item">
+          <span class="product-name"><%= cart_item.product.name %></span> -
+          <span class="quantity">Quantity: <%= cart_item.quantity %></span>
+          <%= link_to 'Remove from Cart', remove_from_cart_path(cart_item), method: :delete, class: 'remove-link' %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="empty-cart">Your cart is empty.</p>
+  <% end %>
+
+  <%= link_to "Back to products", products_url, class: 'back-link' %>
+</div>
+<style>
+  .shopping-cart {
+  margin: 20px;
+}
+
+.cart-items {
+  list-style-type: none;
+  padding: 0;
+}
+
+.cart-item {
+  margin-bottom: 10px;
+}
+
+.product-name {
+  font-weight: bold;
+}
+
+.quantity {
+  margin-left: 10px;
+}
+
+.remove-link {
+  color: red;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.remove-link:hover {
+  text-decoration: underline;
+}
+
+.empty-cart {
+  color: #777;
+}
+
+.back-link {
+  display: block;
+  margin-top: 20px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+</style>
