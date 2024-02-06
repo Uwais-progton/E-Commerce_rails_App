@@ -13,6 +13,12 @@
     <% end %>
   </div>
 <% end %>
-  <%= link_to 'Show Shopping Cart', cart_path, class: 'btn btn-primary' %>
-
-
+<br>
+<br>
+<div>
+  <% if current_user&.admin? %>
+    <%= link_to 'Add Product', new_product_path %>
+  <% else %>
+    <%= link_to 'Show Shopping Cart', cart_path, class: 'btn btn-primary' %>
+  <% end %>
+</div>
