@@ -9,4 +9,5 @@
   <%= link_to 'Delete', @product, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
 
-<%= button_to 'Add to Cart', add_to_cart_path(@product), method: :post %>
+<%= button_to 'Add to Cart', cart_add_to_cart_path(@cart, product_id: @product.id), method: :post %>
+<%= link_to "Back to products", products_url%>
