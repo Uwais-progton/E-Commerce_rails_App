@@ -7,7 +7,10 @@
         <li class="cart-item">
           <span class="product-name"><%= cart_item.product.name %></span> -
           <span class="quantity">Quantity: <%= cart_item.quantity %></span>
-          <%= link_to 'Remove from Cart', remove_from_cart_path(cart_item), method: :delete, class: 'remove-link' %>
+          <%= link_to 'Remove from Cart', remove_from_cart_path(cart_item), method: :delete, data: {
+        turbo_method: :delete,
+        turbo_confirm: "Product will be removed from the cart?"
+      }, class: 'remove-link' %>
         </li>
       <% end %>
     </ul>
